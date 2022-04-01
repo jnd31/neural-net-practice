@@ -7,6 +7,12 @@ def sigmoid(z):
 def linear(z):
     return z
 
+def relu(z):
+    if z < 0:
+        return 0
+    else:
+        return z
+
 class Network():
     def __init__(self, sizes):
         self.num_layers = len(sizes)
@@ -32,7 +38,7 @@ class Network():
     # activation is a numpy array of inputs to the first layer
     # returns a list of numpy arrays of the outputs from each layer
     # the final layer output is a np array found at a[-1].
-    def forward(self, activation, func=sigmoid):
+    def forward(self, activation, func=relu):
         a = [activation]
         for b, w in zip(self.biases, self.weights):
             a.append(func(np.dot(w, a[-1]) + b))
