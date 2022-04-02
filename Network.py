@@ -11,10 +11,7 @@ def linear(z):
     return z
 
 def relu(z):
-    if z < 0:
-        return 0
-    else:
-        return z
+    return np.maximum(0, z)
 
 class Network():
     # sizes is a list containing the number of nodes in each layer, starting with input layer and ending with output layer.
