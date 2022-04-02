@@ -1,4 +1,7 @@
 import numpy as np
+# import nnfs
+# from nnfs.datasets import spiral_data
+# nnfs for generating data, this is just so I remember what to import lmao
 
 #sigmoid function
 def sigmoid(z):
@@ -14,6 +17,8 @@ def relu(z):
         return z
 
 class Network():
+    # sizes is a list containing the number of nodes in each layer, starting with input layer and ending with output layer.
+    # a fn with 2 inputs, 4 neurons, and 3 outputs is thus [2, 4, 3]
     def __init__(self, sizes):
         self.num_layers = len(sizes)
         self.layers = sizes
@@ -43,3 +48,18 @@ class Network():
         for b, w in zip(self.biases, self.weights):
             a.append(func(np.dot(w, a[-1]) + b))
         return a
+
+    # normalizes inputs with the exponential fn
+    # inputs = numpy array of inputs to nn or outputs
+    # returns a np array of np array of normalized probabilities
+    def softmax(self, inputs):
+        exp_inputs = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
+        return exp_inputs / np.sum(exp_inputs, axis=1, keepdims=True)
+
+
+# FOR FUTURE REFERENCE, THIS IS HOW YOU MAKE AND SAVE DATA @ME
+# import matplotlib.pyplot as plt
+# fig = plt.figure()
+# plt.scatter(x[:,0], x[:,1], c=y, cmap='brg')
+# fig.savefig('scatter plot.jpg')
+# plt.show()
